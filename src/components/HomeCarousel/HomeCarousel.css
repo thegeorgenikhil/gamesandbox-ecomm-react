@@ -1,0 +1,72 @@
+.carousel-container {
+  max-width: 60%;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.carousel-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-img {
+  border-radius: 10px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 0;
+  margin: 2rem;
+  z-index: 2;
+}
+
+.carousel-sub-content {
+  margin-top: 1rem;
+}
+
+.carousel-heading {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.carousel-price {
+  font-weight: 600;
+}
+
+.carousel-price-large {
+  font-size: 1.6rem;
+}
+
+.carousel-action-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.wishlist-btn {
+  background-color: rgba(256, 256, 256, 0.17);
+  color: #ffffff;
+}
+
+.thumbnail-dark-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(119, 171, 252, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .carousel-container {
+    max-width: 90%;
+  }
+}

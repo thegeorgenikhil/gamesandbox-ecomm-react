@@ -1,0 +1,27 @@
+.form-container {
+  background-color: var(--off-black);
+  padding: 2rem 12rem;
+  margin: 4rem auto;
+  max-width: 56.25rem;
+  border-radius: 3px;
+}
+
+.form-signup-btn {
+  width: 100%;
+  background-color: var(--secondary-color);
+  color: var(--color-white);
+  font-size: 1.2rem;
+  margin: 1rem 0 10px 0;
+}
+
+.checkbox-group {
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .form-container {
+    padding: 2rem;
+  }
+}
