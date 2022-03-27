@@ -1,14 +1,47 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigationType } from "react-router-dom";
+import { useAlert } from "../../context/alertContext";
 import Input from "../Input/Input";
 import "./SignIn.css";
+import Loader from "../Loader/Loader";
+import { useAuth } from "../../context/authContext";
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const { email, password } = formData;
+  const isFormFullyFilled = email && password;
+  const [isLoading, setIsLoading] = useState(false);
+  const { alertSetter, alertHide } = useAlert();
+  const { setAuth } = useAuth();
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData);
+  const signInHandler = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const res = await axios.post("/api/auth/login", JSON.stringify(formData));
+      const data = await res.data;
+      if (data.foundUser) {
+        setAuth({
+          isAuthenticated: true,
+          token: data.encodedToken,
+        });
+        alertSetter({
+          alertAction: "ALERT-PRIMARY",
+          alertMessage: "Successfully signed in!",
+        });
+        alertHide();
+        localStorage.setItem("token", data.encodedToken);
+        setIsLoading(false);
+        return navigate("/games/all");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="form-container">
       <h1 className="text-center">Login</h1>
@@ -34,7 +67,9 @@ const SignIn = () => {
             Forgot Password
           </Link>
         </div>
-        <button className="btn form-signup-btn">Login</button>
+        <button onClick={signInHandler} className={`btn form-signup-btn ${!isFormFullyFilled && "btn-disabled"}`}>
+          {isLoading ? <Loader /> : "Login"}
+        </button>
       </form>
       <p className="text-center">
         Don't have an account? Sign up!{" "}

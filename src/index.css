@@ -21,6 +21,8 @@ html {
   --color-danger: #f21b3f;
   --input-bg-color: #ffffff23;
   --container-lg: 87.5rem;
+
+  --alert-success: #10b956;
 }
 
 html {
@@ -123,7 +125,7 @@ body {
   display: flex;
 }
 
-.wishlist-container{
+.wishlist-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -179,6 +181,11 @@ body {
   color: var(--off-gray);
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 800px) {
@@ -191,7 +198,7 @@ body {
     gap: 20px;
   }
 
-  .wishlist-container{
+  .wishlist-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;

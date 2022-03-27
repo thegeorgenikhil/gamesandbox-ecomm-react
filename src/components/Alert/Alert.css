@@ -1,0 +1,16 @@
+.alert {
+  color: var(--color-white);
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 3px;
+  box-shadow: var(--shadow-sm);
+  margin: 1rem;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  right: 0;
+}
+
+.alert-success {
+  background-color: var(--alert-success);
+}
