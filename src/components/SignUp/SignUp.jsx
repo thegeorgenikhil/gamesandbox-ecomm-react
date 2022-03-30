@@ -19,7 +19,12 @@ const SignUp = () => {
   const { name, phoneNumber, email, password, confirmPassword, hasUserAgreed } =
     formData;
   const isFormFullyFilled =
-    name && phoneNumber && email && password && confirmPassword && hasUserAgreed;
+    name &&
+    phoneNumber &&
+    email &&
+    password &&
+    confirmPassword &&
+    hasUserAgreed;
   const [isLoading, setIsLoading] = useState(false);
   const { alertSetter, alertHide } = useAlert();
   const { setAuth } = useAuth();
@@ -97,7 +102,7 @@ const SignUp = () => {
               setFormData({ ...formData, [e.target.name]: e.target.checked })
             }
           />
-          <label htmlFor="">
+          <label htmlFor="hasUserAgreed">
             I have read and agreed to all terms and conditions
           </label>
         </div>
@@ -111,7 +116,7 @@ const SignUp = () => {
         </button>
       </form>
       <p className="text-center">
-        Already have an account? Login{" "}
+        Already have an account? Login
         <Link to="/login" className="format-link color-secondary">
           here
         </Link>

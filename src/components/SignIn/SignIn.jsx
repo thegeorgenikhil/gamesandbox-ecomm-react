@@ -60,19 +60,24 @@ const SignIn = () => {
         />
         <div className="flex items-center justify-between">
           <div className="checkbox-group">
-            <input type="checkbox" />
-            <label htmlFor="">Remember Me</label>
+            <input type="checkbox" name="rememberMe" />
+            <label htmlFor="rememberMe">Remember Me</label>
           </div>
           <Link to={"/forgot"} className="format-link color-secondary">
             Forgot Password
           </Link>
         </div>
-        <button onClick={signInHandler} className={`btn form-signup-btn ${!isFormFullyFilled && "btn-disabled"}`}>
+        <button
+          onClick={signInHandler}
+          className={`btn form-signup-btn ${
+            !isFormFullyFilled && "btn-disabled"
+          }`}
+        >
           {isLoading ? <Loader /> : "Login"}
         </button>
       </form>
       <p className="text-center">
-        Don't have an account? Sign up!{" "}
+        Don't have an account? Sign up!
         <Link to="/signup" className="format-link color-secondary">
           here
         </Link>
