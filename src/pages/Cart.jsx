@@ -4,6 +4,7 @@ import CartItems from "../components/CartComponents/CartItems";
 import CartMain from "../components/CartComponents/CartMain";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import { useAlert } from "../context/alertContext";
 
 const Cart = () => {
   return (

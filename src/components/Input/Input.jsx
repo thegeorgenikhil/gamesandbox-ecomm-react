@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.css";
 
-const Input = ({ labelName, name, type, changeHandler }) => {
+const Input = ({ labelName, name, type, changeHandler,placeholder }) => {
   return (
     <div className="input-group">
       <label htmlFor="" className="label">
@@ -12,6 +12,7 @@ const Input = ({ labelName, name, type, changeHandler }) => {
         name={name}
         className="input"
         onChange={changeHandler}
+        placeholder={placeholder || ""}
       />
     </div>
   );

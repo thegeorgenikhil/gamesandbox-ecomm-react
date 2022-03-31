@@ -1,5 +1,7 @@
+import Mockman from "mockman-js";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AllGames from "./pages/AllGames";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -17,8 +19,23 @@ function App() {
         <Route path="/login" element={<SignInPage />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/games/all" element={<AllGames />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<WishList />} />
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <PrivateRoute>
+              <WishList />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/mock" element={<Mockman />} />
       </Routes>
     </BrowserRouter>
   );

@@ -20,6 +20,11 @@
   align-items: center;
 }
 
+.btn-disabled {
+  background-color: var(--off-gray);
+  pointer-events: none;
+}
+
 @media screen and (max-width: 800px) {
   .form-container {
     padding: 2rem;

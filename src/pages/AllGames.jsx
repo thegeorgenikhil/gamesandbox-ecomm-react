@@ -15,7 +15,7 @@ const AllGames = () => {
         <div className="listing-container">
           <main className="listing-main">
             <div className="sort-container">
-              <label for="price-sort" className="sort-label">
+              <label htmlFor="price-sort" className="sort-label">
                 Sort By:
               </label>
               <select id="price-sort" className="sort-options">
