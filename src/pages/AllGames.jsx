@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import { AiFillStar } from "react-icons/ai";
 import ListingCard from "../components/ListingCard/ListingCard";
+import { AiFillStar } from "react-icons/ai";
+import { getAllProducts } from "../services/products";
+import { useListing } from "../context/listingContext";
+import { maxPriceReducer } from "../helpers/maxPriceReducer";
+import { applyPriceFilter } from "../helpers/filterHelpers/priceFilter";
+import { applyRatingFilter } from "../helpers/filterHelpers/ratingFilter";
 const AllGames = () => {
+  const [sliderMaxValue, setSliderMaxValue] = useState();
+  const { listingState, listingDispatch } = useListing();
+  const { products, categoryList, price, rating } = listingState;
+  const priceFilteredList = applyPriceFilter(products, price);
+  const rateFilteredList = applyRatingFilter(priceFilteredList, rating);
+
+  const categoryFilterChangeHandler = (e) => {
+    listingDispatch({
+      type: "LISTING_CATEGORY_FILTER",
+      payload: { categoryName: e.target.name, isChecked: e.target.checked },
+    });
+  };
+
+  const sliderChangeHandler = (e) => {
+    listingDispatch({
+      type: "UPDATE_LISTING_PRICE",
+      payload: { price: e.target.value },
+    });
+  };
+
+  const ratingChangeHandler = (e) => {
+    listingDispatch({
+      type: "UPDATE_LISTING_RATING",
+      payload: { rating: Number(e.target.value) },
+    });
+  };
+
+  useEffect(async () => {
+    const res = await getAllProducts();
+    const data = await res.data;
+    const maxPrice = data.products.reduce(maxPriceReducer, 0);
+    setSliderMaxValue(maxPrice);
+    listingDispatch({
+      type: "PRODUCT_LIST_SET",
+      payload: { products: data.products },
+    });
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -18,7 +61,16 @@ const AllGames = () => {
               <label htmlFor="price-sort" className="sort-label">
                 Sort By:
               </label>
-              <select id="price-sort" className="sort-options">
+              <select
+                id="price-sort"
+                className="sort-options"
+                onChange={(e) =>
+                  listingDispatch({
+                    type: "LISTING_SORT",
+                    payload: { products: products, sortType: e.target.value },
+                  })
+                }
+              >
                 <option value="price-low-to-high" className="sort-option">
                   Price Low to High
                 </option>
@@ -28,14 +80,16 @@ const AllGames = () => {
               </select>
             </div>
             <div className="listing-section">
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
+              {rateFilteredList &&
+                rateFilteredList.map((product) => {
+                  return categoryList.length > 0 ? (
+                    categoryList.includes(
+                      product.categoryName.toUpperCase()
+                    ) && <ListingCard key={product.id} productItem={product} />
+                  ) : (
+                    <ListingCard key={product.id} productItem={product} />
+                  );
+                })}
             </div>
           </main>
           <aside className="listing-aside">
@@ -43,19 +97,48 @@ const AllGames = () => {
               <h3>Filters</h3>
               <div className="divider-sm"></div>
 
+              <div className="slider-content">
+                <label htmlFor="slider">₹{price}</label>
+                <div className="slider-container">
+                  <input
+                    type="range"
+                    name="slider"
+                    min="0"
+                    max={sliderMaxValue}
+                    step="50"
+                    id="slider"
+                    value={price}
+                    onChange={sliderChangeHandler}
+                  />
+                </div>
+              </div>
+              <div className="divider-sm"></div>
+
               <div className="filter-group">
                 <p className="filter-heading">CATEGORY</p>
                 <div className="filter-input-container">
                   <div className="filter-input-group">
-                    <input type="checkbox" name="racing" />
+                    <input
+                      type="checkbox"
+                      name="racing"
+                      onChange={categoryFilterChangeHandler}
+                    />
                     <label htmlFor="racing">Racing</label>
                   </div>
                   <div className="filter-input-group">
-                    <input type="checkbox" name="shooter" />
-                    <label htmlFor="shooter">Shooter</label>
+                    <input
+                      type="checkbox"
+                      name="shooting"
+                      onChange={categoryFilterChangeHandler}
+                    />
+                    <label htmlFor="shooting">Shooting</label>
                   </div>
                   <div className="filter-input-group">
-                    <input type="checkbox" name="open-world" />
+                    <input
+                      type="checkbox"
+                      name="open-world"
+                      onChange={categoryFilterChangeHandler}
+                    />
                     <label htmlFor="open-world">Open-World</label>
                   </div>
                 </div>
@@ -64,11 +147,48 @@ const AllGames = () => {
               <div className="filter-group">
                 <p className="filter-heading">RATINGS</p>
                 <div className="filter-rating-container">
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
+                  <div className="rating-input-group">
+                    <input
+                      type="radio"
+                      name="rating"
+                      id="rating-4"
+                      value={4}
+                      onChange={ratingChangeHandler}
+                    />
+                    <label htmlFor="rating-4">4 and above</label>
+                  </div>
+                  <div className="rating-input-group">
+                    <input
+                      type="radio"
+                      name="rating"
+                      id="rating-3"
+                      value={3}
+                      onChange={ratingChangeHandler}
+                    />
+                    <label htmlFor="rating-3">3 and above</label>
+                  </div>
+                  <div className="rating-input-group">
+                    <input
+                      type="radio"
+                      name="rating"
+                      id="rating-2"
+                      value={2}
+                      onChange={ratingChangeHandler}
+                    />
+                    <label htmlFor="rating-2">2 and above</label>
+                  </div>
+                  <div className="rating-input-group">
+                    <input
+                      type="radio"
+                      name="rating"
+                      id="rating-1"
+                      value={1}
+                      onChange={ratingChangeHandler}
+                    />
+                    <label htmlFor="rating-1" checked>
+                      1 and above
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
