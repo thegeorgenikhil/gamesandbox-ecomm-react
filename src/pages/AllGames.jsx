@@ -121,6 +121,7 @@ const AllGames = () => {
                     <input
                       type="checkbox"
                       name="racing"
+                      id="racing"
                       onChange={categoryFilterChangeHandler}
                     />
                     <label htmlFor="racing">Racing</label>
@@ -129,6 +130,7 @@ const AllGames = () => {
                     <input
                       type="checkbox"
                       name="shooting"
+                      id="shooting"
                       onChange={categoryFilterChangeHandler}
                     />
                     <label htmlFor="shooting">Shooting</label>
@@ -137,6 +139,7 @@ const AllGames = () => {
                     <input
                       type="checkbox"
                       name="open-world"
+                      id="open-world"
                       onChange={categoryFilterChangeHandler}
                     />
                     <label htmlFor="open-world">Open-World</label>
