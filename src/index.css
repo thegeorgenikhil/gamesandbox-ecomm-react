@@ -18,6 +18,7 @@ html {
   --color-white: #ffffff;
   --text-white: #ffffff;
 
+  --color-gold: #ffd700;
   --color-danger: #f21b3f;
   --input-bg-color: #ffffff23;
   --container-lg: 87.5rem;
@@ -134,13 +135,13 @@ body {
   gap: 1.25rem;
 }
 
-.rating-input-group{
+.rating-input-group {
   gap: 5px;
   display: flex;
   align-items: center;
 }
 
-.rating-input-group label{
+.rating-input-group label {
   font-size: 1rem;
 }
 

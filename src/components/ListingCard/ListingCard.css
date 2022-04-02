@@ -46,6 +46,15 @@
   margin-top: 8px;
 }
 
+.listing-card-rating {
+  display: flex;
+  align-items: center;
+  color: var(--color-gold);
+  width: fit-content;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
 .listing-img {
   max-width: 100%;
 }
