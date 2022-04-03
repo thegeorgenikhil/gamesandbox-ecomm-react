@@ -1,4 +1,5 @@
 import { Response } from "miragejs";
+import { sortByPrice } from "../../helpers/filterHelpers/sortByPrice";
 
 /**
  * All the routes related to Product are present here.
@@ -11,7 +12,8 @@ import { Response } from "miragejs";
  * */
 
 export const getAllProductsHandler = function () {
-  return new Response(200, {}, { products: this.db.products });
+  const sortedProducts = sortByPrice(this.db.products, "price-low-to-high");
+  return new Response(200, {}, { products: sortedProducts });
 };
 
 /**

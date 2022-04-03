@@ -18,6 +18,7 @@ html {
   --color-white: #ffffff;
   --text-white: #ffffff;
 
+  --color-gold: #ffd700;
   --color-danger: #f21b3f;
   --input-bg-color: #ffffff23;
   --container-lg: 87.5rem;
@@ -111,6 +112,9 @@ body {
 
 .filter-rating-container {
   font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 0.5rem;
 }
 
@@ -129,6 +133,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1.25rem;
+}
+
+.rating-input-group {
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.rating-input-group label {
+  font-size: 1rem;
+}
+
+.filter-clear-btn{
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
 }
 
 /* UTILITY CLASSES */
