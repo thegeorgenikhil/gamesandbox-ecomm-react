@@ -94,7 +94,15 @@ const AllGames = () => {
           </main>
           <aside className="listing-aside">
             <div className="filter-container">
-              <h3>Filters</h3>
+              <div className="flex justify-between items-center">
+                <h3>Filters</h3>
+                <p
+                  className="filter-clear-btn"
+                  onClick={() => listingDispatch({ type: "CLEAR_ALL_FILTERS",payload:{maxPrice:sliderMaxValue} })}
+                >
+                  CLEAR
+                </p>
+              </div>
               <div className="divider-sm"></div>
 
               <div className="slider-content">
@@ -105,7 +113,6 @@ const AllGames = () => {
                     name="slider"
                     min="0"
                     max={sliderMaxValue}
-                    step="50"
                     id="slider"
                     value={price}
                     onChange={sliderChangeHandler}

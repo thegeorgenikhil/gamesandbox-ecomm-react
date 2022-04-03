@@ -145,6 +145,13 @@ body {
   font-size: 1rem;
 }
 
+.filter-clear-btn{
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
 /* UTILITY CLASSES */
 
 .format-link {
