@@ -4,7 +4,7 @@ import { sortByPrice } from "../helpers/filterHelpers/sortByPrice";
 export const listingReducer = (state, action) => {
   switch (action.type) {
     case "PRODUCT_LIST_SET":
-      return { ...state, products: action.payload.products };
+      return { ...state, products: action.payload.products,price:action.payload.price };
     case "LISTING_SORT":
       const {
         payload: { products, sortType },

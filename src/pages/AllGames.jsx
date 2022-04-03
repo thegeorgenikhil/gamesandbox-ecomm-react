@@ -43,7 +43,7 @@ const AllGames = () => {
     setSliderMaxValue(maxPrice);
     listingDispatch({
       type: "PRODUCT_LIST_SET",
-      payload: { products: data.products },
+      payload: { products: data.products, price: Number(maxPrice) },
     });
   }, []);
 
