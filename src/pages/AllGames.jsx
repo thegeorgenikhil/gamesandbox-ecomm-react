@@ -98,7 +98,12 @@ const AllGames = () => {
                 <h3>Filters</h3>
                 <p
                   className="filter-clear-btn"
-                  onClick={() => listingDispatch({ type: "CLEAR_ALL_FILTERS",payload:{maxPrice:sliderMaxValue} })}
+                  onClick={() =>
+                    listingDispatch({
+                      type: "CLEAR_ALL_FILTERS",
+                      payload: { maxPrice: sliderMaxValue },
+                    })
+                  }
                 >
                   CLEAR
                 </p>
