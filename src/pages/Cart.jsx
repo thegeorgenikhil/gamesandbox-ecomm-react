@@ -4,28 +4,42 @@ import CartItems from "../components/CartComponents/CartItems";
 import CartMain from "../components/CartComponents/CartMain";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import { useAlert } from "../context/alertContext";
+import { useUserInfo } from "../context/userInfoContext";
 
 const Cart = () => {
+  const { userInfoState } = useUserInfo();
+  const { cartItems } = userInfoState;
   return (
     <div>
       <Navbar />
-      <div className="container-lg">
-        <div className="game-category-heading">
-          <h1>MY CART</h1>
-          <div className="divider-sm"></div>
-        </div>
-        <div className="cart-container-main">
-          <div className="cart-container">
-            <CartMain />
-            <CartAside />
+      {cartItems.length > 0 && (
+        <main>
+          <div className="container-lg">
+            <div className="game-category-heading">
+              <h1>MY CART</h1>
+              <div className="divider-sm"></div>
+            </div>
+            <div className="cart-container-main">
+              <div className="cart-container">
+                <CartMain />
+                <CartAside />
+              </div>
+              <div>
+                <CartItems />
+              </div>
+            </div>
           </div>
-          <div>
-            <CartItems />
+          <Footer />
+        </main>
+      )}
+      {cartItems.length === 0 && (
+        <div className="container-lg">
+          <div className="game-category-heading">
+            <h1 className="text-center">Your Cart Is Empty</h1>
+            <div className="divider-sm"></div>
           </div>
         </div>
-      </div>
-      <Footer />
+      )}
     </div>
   );
 };

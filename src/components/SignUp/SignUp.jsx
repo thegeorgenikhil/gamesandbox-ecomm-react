@@ -22,8 +22,7 @@ const SignUp = () => {
     name &&
     phoneNumber &&
     email &&
-    password &&
-    confirmPassword &&
+    password === confirmPassword &&
     hasUserAgreed;
   const [isLoading, setIsLoading] = useState(false);
   const { alertSetter, alertHide } = useAlert();
@@ -39,17 +38,31 @@ const SignUp = () => {
       setIsLoading(true);
       const res = await axios.post(
         "/api/auth/signup",
-        JSON.stringify(formData)
+        JSON.stringify({ name, phoneNumber, email, password })
       );
       const data = await res.data;
       if (data.createdUser) {
-        setAuth({ isAuthenticated: true, token: data.encodedToken });
+        setAuth({
+          isAuthenticated: true,
+          token: data.encodedToken,
+          user: data.createdUser,
+        });
         alertSetter({
           alertAction: "ALERT-PRIMARY",
           alertMessage: "Successfully signed up!",
         });
         alertHide();
-        localStorage.setItem("token", res.data.encodedToken);
+        localStorage.setItem("token", data.encodedToken);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...data.createdUser,
+            createdAt: undefined,
+            updatedAt: undefined,
+            _id: undefined,
+            password: undefined,
+          })
+        );
         setIsLoading(false);
         return navigate("/games/all");
       }

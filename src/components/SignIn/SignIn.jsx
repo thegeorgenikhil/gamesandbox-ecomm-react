@@ -28,6 +28,7 @@ const SignIn = () => {
         setAuth({
           isAuthenticated: true,
           token: data.encodedToken,
+          user: data.foundUser,
         });
         alertSetter({
           alertAction: "ALERT-PRIMARY",
@@ -35,6 +36,16 @@ const SignIn = () => {
         });
         alertHide();
         localStorage.setItem("token", data.encodedToken);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...data.foundUser,
+            createdAt: undefined,
+            updatedAt: undefined,
+            _id: undefined,
+            password: undefined,
+          })
+        );
         setIsLoading(false);
         return navigate("/games/all");
       }
@@ -50,12 +61,14 @@ const SignIn = () => {
           labelName={"EMAIL"}
           name="email"
           type={"email"}
+          value={email}
           changeHandler={changeHandler}
         />
         <Input
           labelName={"PASSWORD"}
           name="password"
           type={"password"}
+          value={password}
           changeHandler={changeHandler}
         />
         <div className="flex items-center justify-between">
@@ -75,9 +88,18 @@ const SignIn = () => {
         >
           {isLoading ? <Loader /> : "Login"}
         </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setFormData({ email: "test@gmail.com", password: "test123" });
+          }}
+          className={`btn form-signup-btn`}
+        >
+          Use Test Credentials
+        </button>
       </form>
       <p className="text-center">
-        Don't have an account? Sign up!
+        Don't have an account? Sign up!{" "}
         <Link to="/signup" className="format-link color-secondary">
           here
         </Link>

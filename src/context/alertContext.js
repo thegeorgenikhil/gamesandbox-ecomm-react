@@ -1,28 +1,8 @@
 import { React, createContext, useContext, useReducer } from "react";
 import Alert from "../components/Alert/Alert";
+import { alertReducer } from "../reducers/alertReducer";
 
 const AlertContext = createContext();
-
-const alertReducer = (state, action) => {
-  switch (action.alertAction) {
-    case "ALERT-SUCCESS":
-      return {
-        ...state,
-        showAlert: true,
-        alertMessage: action.alertMessage,
-        alertScheme: "alert-success",
-      };
-    case "ALERT-PRIMARY":
-      return {
-        ...state,
-        showAlert: true,
-        alertMessage: action.alertMessage,
-        alertScheme: "",
-      };
-    case "ALERT-HIDE":
-      return { ...state, showAlert: false, alertMessage: "", alertScheme: "" };
-  }
-};
 
 export const AlertProvider = ({ children }) => {
   const [alertState, alertSetter] = useReducer(alertReducer, {

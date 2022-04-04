@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import ListingCard from "../components/ListingCard/ListingCard";
-import { AiFillStar } from "react-icons/ai";
 import { getAllProducts } from "../services/products";
 import { useListing } from "../context/listingContext";
 import { maxPriceReducer } from "../helpers/maxPriceReducer";
 import { applyPriceFilter } from "../helpers/filterHelpers/priceFilter";
 import { applyRatingFilter } from "../helpers/filterHelpers/ratingFilter";
+import { useUserInfo } from "../context/userInfoContext";
+import { useAuth } from "../context/authContext";
 const AllGames = () => {
   const [sliderMaxValue, setSliderMaxValue] = useState();
   const { listingState, listingDispatch } = useListing();
+  const { auth } = useAuth();
+
   const { products, categoryList, price, rating } = listingState;
+  const { token } = auth;
   const priceFilteredList = applyPriceFilter(products, price);
   const rateFilteredList = applyRatingFilter(priceFilteredList, rating);
 
@@ -85,9 +89,19 @@ const AllGames = () => {
                   return categoryList.length > 0 ? (
                     categoryList.includes(
                       product.categoryName.toUpperCase()
-                    ) && <ListingCard key={product.id} productItem={product} />
+                    ) && (
+                      <ListingCard
+                        key={product.id}
+                        productItem={product}
+                        authToken={token}
+                      />
+                    )
                   ) : (
-                    <ListingCard key={product.id} productItem={product} />
+                    <ListingCard
+                      key={product.id}
+                      productItem={product}
+                      authToken={token}
+                    />
                   );
                 })}
             </div>

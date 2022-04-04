@@ -6,16 +6,21 @@ import {
 } from "react-icons/ai";
 import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import { useUserInfo } from "../../context/userInfoContext";
 import "./Navbar.css";
 
 const Navbar = () => {
   const { auth, setAuth } = useAuth();
+  const { userInfoDispatch, userInfoState } = useUserInfo();
+  const { cartItems } = userInfoState;
   const { isAuthenticated } = auth;
   const navigate = useNavigate();
 
   const signOutHandler = () => {
-    setAuth({ isAuthenticated: false, token: "" });
+    setAuth({ isAuthenticated: false, token: "", user: "" });
+    userInfoDispatch({ type: "CLEAR_USER_DETAILS" });
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     return navigate("/");
   };
   return (
@@ -40,20 +45,25 @@ const Navbar = () => {
           </div>
         </li>
         <li className="nav-item">
-          <Link className="nav-item-link" to="/cart">
-            <AiOutlineShoppingCart fontSize={"1.4rem"} />
-          </Link>
+          <div className="icon-badge-container">
+            <Link className="nav-item-link" to="/cart">
+              <AiOutlineShoppingCart fontSize={"1.4rem"} />
+            </Link>
+            {cartItems.length > 0 && (
+              <div className="icon-badge">{cartItems.length}</div>
+            )}
+          </div>
         </li>
         <li className="nav-item">
-          <Link className="nav-item-link" to="/wishlist">
-            <AiOutlineHeart fontSize={"1.4rem"} />
-          </Link>
+          <div className="icon-badge-container">
+            <Link className="nav-item-link" to="/wishlist">
+              <AiOutlineHeart fontSize={"1.4rem"} />
+            </Link>
+          </div>
         </li>
         {isAuthenticated ? (
           <li className="nav-item nav-signout-btn" onClick={signOutHandler}>
-            <p className="nav-item-link">
-              SIGN-OUT
-            </p>
+            <p className="nav-item-link">SIGN-OUT</p>
           </li>
         ) : (
           <Link to={"/signup"} className="format-link">

@@ -1,10 +1,13 @@
-import React from "react";
+import React,{useEffect} from "react";
 import CategoriesSection from "../components/CategoriesSection/CategoriesSection";
 import Footer from "../components/Footer/Footer";
 import HomeCarousel from "../components/HomeCarousel/HomeCarousel";
 import Navbar from "../components/Navbar/Navbar";
 
 const Home = () => {
+  useEffect(() => {
+    const token = localStorage.getItem("")
+  },[])
   return (
     <div>
       <Navbar />
