@@ -2,8 +2,30 @@ import React from "react";
 import "./ListingCard.css";
 import { BsHeart } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
-const ListingCard = ({ productItem }) => {
+import { addItemToCart } from "../../services/CartServices/addItemToCart";
+import { useUserInfo } from "../../context/userInfoContext";
+import { useAlert } from "../../context/alertContext";
+const ListingCard = ({ productItem, authToken }) => {
   const { title, price, imgURL, rating } = productItem;
+  const { userInfoDispatch } = useUserInfo();
+  const { alertSetter, alertHide } = useAlert();
+
+  const addToCardHandler = async (product) => {
+    const res = await addItemToCart(authToken, product);
+    const data = await res.data;
+    if (data.cart) {
+      userInfoDispatch({
+        type: "INCREMENT_CART_PRODUCT",
+        payload: { product: product },
+      });
+      alertSetter({
+        alertAction: "ALERT-PRIMARY",
+        alertMessage: "Successfully Added To Cart!",
+      });
+      alertHide();
+    }
+  };
+
   return (
     <div className="listing-card">
       <div className="listing-img-container">
@@ -21,7 +43,12 @@ const ListingCard = ({ productItem }) => {
           </p>
         </div>
         <div className="listing-card-actions">
-          <button className="btn card-action-btn">ADD TO CART</button>
+          <button
+            className="btn card-action-btn"
+            onClick={() => addToCardHandler(productItem)}
+          >
+            ADD TO CART
+          </button>
         </div>
       </div>
     </div>

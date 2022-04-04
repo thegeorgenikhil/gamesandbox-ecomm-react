@@ -14,3 +14,7 @@
 .alert-success {
   background-color: var(--alert-success);
 }
+
+.alert-danger {
+  background-color: var(--color-danger);
+}

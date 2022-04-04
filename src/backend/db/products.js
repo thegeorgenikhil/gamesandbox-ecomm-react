@@ -107,11 +107,11 @@ export const products = [
   },
   {
     _id: uuid(),
-    title: "F1 20220",
+    title: "F1 2020",
     price: "1199",
     categoryName: "RACING",
     imgURL:
-    "https://res.cloudinary.com/dgi9vljim/image/upload/v1648231691/GameSandbox/product-images/f1-2020_zjhdte.png",
+      "https://res.cloudinary.com/dgi9vljim/image/upload/v1648231691/GameSandbox/product-images/f1-2020_zjhdte.png",
     rating: 3.9,
   },
   {
