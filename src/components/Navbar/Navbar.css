@@ -69,11 +69,15 @@
   color: var(--text-white);
 }
 
-.icon-badge-container{
+.nav-icon {
+  font-size: 1.4rem;
+}
+
+.icon-badge-container {
   position: relative;
 }
 
-.icon-badge{
+.icon-badge {
   position: absolute;
   top: -10px;
   right: -10px;

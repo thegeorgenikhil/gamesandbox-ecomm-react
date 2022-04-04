@@ -5,9 +5,6 @@ import HomeCarousel from "../components/HomeCarousel/HomeCarousel";
 import Navbar from "../components/Navbar/Navbar";
 
 const Home = () => {
-  useEffect(() => {
-    const token = localStorage.getItem("")
-  },[])
   return (
     <div>
       <Navbar />

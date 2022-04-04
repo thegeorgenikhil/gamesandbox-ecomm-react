@@ -99,7 +99,7 @@ const SignIn = () => {
         </button>
       </form>
       <p className="text-center">
-        Don't have an account? Sign up!{" "}
+        Don't have an account? Sign up!&nbsp;
         <Link to="/signup" className="format-link color-secondary">
           here
         </Link>

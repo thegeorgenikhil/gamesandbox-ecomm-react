@@ -14,13 +14,10 @@ export const userInfoReducer = (state, action) => {
       const indexOfProductInCart = state.cartItems.findIndex(
         (item) => item._id === action.payload.product._id
       );
-      console.log(indexOfProductInCart);
-      console.log(state.cartItems);
       if (indexOfProductInCart !== -1) {
         const updatedArray = state.cartItems.filter((item, index) => {
           return index !== indexOfProductInCart;
         });
-        console.log(updatedArray);
         return {
           ...state,
           cartItems: updatedArray,

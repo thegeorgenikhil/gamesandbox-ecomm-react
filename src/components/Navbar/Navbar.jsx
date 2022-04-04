@@ -36,7 +36,7 @@ const Navbar = () => {
       <ul className="nav-items">
         <li className="nav-item">
           <div className="nav-item-link nav-search-container">
-            <AiOutlineSearch fontSize={"1.4rem"} />
+            <AiOutlineSearch className="nav-icon" />
             <input
               type="text"
               placeholder="Search"
@@ -47,7 +47,7 @@ const Navbar = () => {
         <li className="nav-item">
           <div className="icon-badge-container">
             <Link className="nav-item-link" to="/cart">
-              <AiOutlineShoppingCart fontSize={"1.4rem"} />
+              <AiOutlineShoppingCart className="nav-icon" />
             </Link>
             {cartItems.length > 0 && (
               <div className="icon-badge">{cartItems.length}</div>
@@ -57,7 +57,7 @@ const Navbar = () => {
         <li className="nav-item">
           <div className="icon-badge-container">
             <Link className="nav-item-link" to="/wishlist">
-              <AiOutlineHeart fontSize={"1.4rem"} />
+              <AiOutlineHeart className="nav-icon" />
             </Link>
           </div>
         </li>
