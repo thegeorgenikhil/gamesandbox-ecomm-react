@@ -148,6 +148,7 @@ const AllGames = () => {
                       type="checkbox"
                       name="racing"
                       id="racing"
+                      checked={listingState.categoryList.includes("RACING")}
                       onChange={categoryFilterChangeHandler}
                     />
                     <label htmlFor="racing">Racing</label>
@@ -157,6 +158,7 @@ const AllGames = () => {
                       type="checkbox"
                       name="shooting"
                       id="shooting"
+                      checked={listingState.categoryList.includes("SHOOTING")}
                       onChange={categoryFilterChangeHandler}
                     />
                     <label htmlFor="shooting">Shooting</label>
@@ -166,6 +168,7 @@ const AllGames = () => {
                       type="checkbox"
                       name="open-world"
                       id="open-world"
+                      checked={listingState.categoryList.includes("OPEN-WORLD")}
                       onChange={categoryFilterChangeHandler}
                     />
                     <label htmlFor="open-world">Open-World</label>
@@ -182,6 +185,7 @@ const AllGames = () => {
                       name="rating"
                       id="rating-4"
                       value={4}
+                      checked={listingState.rating === 4}
                       onChange={ratingChangeHandler}
                     />
                     <label htmlFor="rating-4">4 and above</label>
@@ -192,6 +196,7 @@ const AllGames = () => {
                       name="rating"
                       id="rating-3"
                       value={3}
+                      checked={listingState.rating === 3}
                       onChange={ratingChangeHandler}
                     />
                     <label htmlFor="rating-3">3 and above</label>
@@ -202,6 +207,7 @@ const AllGames = () => {
                       name="rating"
                       id="rating-2"
                       value={2}
+                      checked={listingState.rating === 2}
                       onChange={ratingChangeHandler}
                     />
                     <label htmlFor="rating-2">2 and above</label>
@@ -212,6 +218,7 @@ const AllGames = () => {
                       name="rating"
                       id="rating-1"
                       value={1}
+                      checked={listingState.rating === 1}
                       onChange={ratingChangeHandler}
                     />
                     <label htmlFor="rating-1" checked>
