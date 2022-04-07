@@ -6,7 +6,7 @@ import { useUserInfo } from "../../context/userInfoContext";
 import { cartItemReducer } from "../../helpers/cartHelpers/cartItemReducer";
 import { cartQuantityChange } from "../../services/CartServices/cartQuantityChange";
 import { deleteFromCart } from "../../services/CartServices/deleteFromCart";
-import { getUserCartDetails } from "../../services/CartServices/getUserCartDetails";
+import { addItemToWishlist } from "../../services/WishlistServices/addToWishList";
 import "./styles/CartItems.css";
 
 const CartItemCard = ({ item }) => {
@@ -16,6 +16,7 @@ const CartItemCard = ({ item }) => {
   const { cartItems } = userInfoState;
   const { auth } = useAuth();
   const { token } = auth;
+
   const cartDeleteHandler = async (e) => {
     e.preventDefault();
     try {
@@ -32,6 +33,26 @@ const CartItemCard = ({ item }) => {
         alertSetter({
           alertAction: "ALERT-DANGER",
           alertMessage: "Item Deleted From Cart!",
+        });
+        alertHide();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addToWishlistHandler = async (product) => {
+    try {
+      const res = await addItemToWishlist(token, product);
+      const data = await res.data;
+      if (data.wishlist) {
+        userInfoDispatch({
+          type: "ADD_TO_WISHLIST",
+          payload: { product: product },
+        });
+        alertSetter({
+          alertAction: "ALERT-PRIMARY",
+          alertMessage: "Successfully Added To Wishlist",
         });
         alertHide();
       }
@@ -82,7 +103,12 @@ const CartItemCard = ({ item }) => {
           <button className="btn cart-remove-btn" onClick={cartDeleteHandler}>
             REMOVE FROM CART
           </button>
-          <button className="btn cart-wishlist-add-btn">ADD TO WISHLIST</button>
+          <button
+            className="btn cart-wishlist-add-btn"
+            onClick={() => addToWishlistHandler(item)}
+          >
+            ADD TO WISHLIST
+          </button>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ import "./Navbar.css";
 const Navbar = () => {
   const { auth, setAuth } = useAuth();
   const { userInfoDispatch, userInfoState } = useUserInfo();
-  const { cartItems } = userInfoState;
+  const { cartItems, wishlistItems } = userInfoState;
   const { isAuthenticated } = auth;
   const navigate = useNavigate();
 
@@ -59,6 +59,9 @@ const Navbar = () => {
             <Link className="nav-item-link" to="/wishlist">
               <AiOutlineHeart className="nav-icon" />
             </Link>
+            {wishlistItems.length > 0 && (
+              <div className="icon-badge">{wishlistItems.length}</div>
+            )}
           </div>
         </li>
         {isAuthenticated ? (

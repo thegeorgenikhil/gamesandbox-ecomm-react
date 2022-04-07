@@ -10,23 +10,6 @@ export const UserInfoProvider = ({ children }) => {
     cartItems: [],
     wishlistItems: [],
   });
-  const { auth } = useAuth();
-  const { isAuthenticated, token } = auth;
-  useEffect(async () => {
-    isAuthenticated &&
-      (async () => {
-        try {
-          const res = await getUserCartDetails(token);
-          const data = await res.data;
-          userInfoDispatch({
-            type: "SET_USER_CART",
-            payload: { cart: data.cart },
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      })();
-  }, [isAuthenticated]);
   return (
     <UserInfoContext.Provider value={{ userInfoState, userInfoDispatch }}>
       {children}
