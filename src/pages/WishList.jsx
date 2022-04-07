@@ -3,57 +3,18 @@ import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import { BsFillHeartFill } from "react-icons/bs";
 import { useUserInfo } from "../context/userInfoContext";
-import { removeFromWishlist } from "../services/WishlistServices/removeFromWishlist";
-import { addItemToCart } from "../services/CartServices/addItemToCart";
 import { useAuth } from "../context/authContext";
-import { useAlert } from "../context/alertContext";
 
 const WishListCard = ({ product }) => {
-  const { userInfoDispatch } = useUserInfo();
+  const { addToCartHandler, removeFromWishlistHandler } = useUserInfo();
   const {
-    auth: { token: authToken },
+    auth: { token },
   } = useAuth();
-  const { alertSetter, alertHide } = useAlert();
 
-  const addToCardHandler = async (product) => {
-    try {
-      const res = await addItemToCart(authToken, product);
-      const data = await res.data;
-      if (data.cart) {
-        removeFromWishlistHandler(product);
-        userInfoDispatch({
-          type: "INCREMENT_CART_PRODUCT",
-          payload: { product: product },
-        });
-        alertSetter({
-          alertAction: "ALERT-PRIMARY",
-          alertMessage: "Successfully Added To Cart!",
-        });
-        alertHide();
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const removeFromWishlistHandler = async (product) => {
-    try {
-      const res = await removeFromWishlist(authToken, product._id);
-      const data = await res.data;
-      if (data.wishlist) {
-        userInfoDispatch({
-          type: "REMOVE_FROM_WISHLIST",
-          payload: { product: product },
-        });
-        alertSetter({
-          alertAction: "ALERT-PRIMARY",
-          alertMessage: "Deleted From Wishlist",
-        });
-        alertHide();
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const addToCartAndRemoveFromWishlist = (product, token) => {
+    addToCartHandler(product, token)
+      .then(() => removeFromWishlistHandler(product, token))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -62,7 +23,7 @@ const WishListCard = ({ product }) => {
         <img src={product.imgURL} className="listing-img" alt={product.name} />
         <BsFillHeartFill
           className="card-wishlist-icon"
-          onClick={() => removeFromWishlistHandler(product)}
+          onClick={() => removeFromWishlistHandler(product, token)}
         />
         <div className="card-dark-overlay"></div>
       </div>
@@ -74,7 +35,7 @@ const WishListCard = ({ product }) => {
         <div className="listing-card-actions">
           <button
             className="btn card-action-btn"
-            onClick={() => addToCardHandler(product)}
+            onClick={() => addToCartAndRemoveFromWishlist(product, token)}
           >
             ADD TO CART
           </button>

@@ -7,8 +7,8 @@ import { useListing } from "../context/listingContext";
 import { maxPriceReducer } from "../helpers/maxPriceReducer";
 import { applyPriceFilter } from "../helpers/filterHelpers/priceFilter";
 import { applyRatingFilter } from "../helpers/filterHelpers/ratingFilter";
-import { useUserInfo } from "../context/userInfoContext";
 import { useAuth } from "../context/authContext";
+
 const AllGames = () => {
   const [sliderMaxValue, setSliderMaxValue] = useState();
   const { listingState, listingDispatch } = useListing();

@@ -14,13 +14,13 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <UserInfoProvider>
-        <AlertProvider>
+      <AlertProvider>
+        <UserInfoProvider>
           <ListingProvider>
             <App />
           </ListingProvider>
-        </AlertProvider>
-      </UserInfoProvider>
+        </UserInfoProvider>
+      </AlertProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
