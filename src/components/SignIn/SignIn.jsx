@@ -23,6 +23,14 @@ const SignIn = () => {
     try {
       setIsLoading(true);
       const res = await axios.post("/api/auth/login", JSON.stringify(formData));
+      if (res.status === 201) {
+        setIsLoading(false);
+        alertSetter({
+          alertAction: "ALERT-DANGER",
+          alertMessage: "Wrong Password.Try Again!",
+        });
+        alertHide();
+      }
       const data = await res.data;
       if (data.foundUser) {
         setAuth({
@@ -47,10 +55,17 @@ const SignIn = () => {
           })
         );
         setIsLoading(false);
+        setFormData({ email: "", password: "" });
         return navigate("/games/all");
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
+      alertSetter({
+        alertAction: "ALERT-DANGER",
+        alertMessage: "Failed to sign-in. Try again!",
+      });
+      alertHide();
     }
   };
   return (

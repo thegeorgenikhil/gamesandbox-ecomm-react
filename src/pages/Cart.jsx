@@ -7,8 +7,9 @@ import Navbar from "../components/Navbar/Navbar";
 import { useUserInfo } from "../context/userInfoContext";
 
 const Cart = () => {
-  const { userInfoState } = useUserInfo();
-  const { cartItems } = userInfoState;
+  const {
+    userInfoState: { cartItems },
+  } = useUserInfo();
   return (
     <div>
       <Navbar />

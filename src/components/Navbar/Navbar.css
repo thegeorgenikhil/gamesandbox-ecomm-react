@@ -91,4 +91,12 @@
   .nav-search-container {
     display: none;
   }
+
+  .nav-brand {
+    font-size: 1.1rem;
+  }
+
+  .nav-items {
+    gap: 10px;
+  }
 }

@@ -1,36 +1,38 @@
 import React from "react";
 import "./ListingCard.css";
-import { BsHeart } from "react-icons/bs";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
-import { addItemToCart } from "../../services/CartServices/addItemToCart";
 import { useUserInfo } from "../../context/userInfoContext";
-import { useAlert } from "../../context/alertContext";
-const ListingCard = ({ productItem, authToken }) => {
-  const { title, price, imgURL, rating } = productItem;
-  const { userInfoDispatch } = useUserInfo();
-  const { alertSetter, alertHide } = useAlert();
+import { isProductInWishlist } from "../../services/WishlistServices/isProductInWishlist";
+import { useAuth } from "../../context/authContext";
 
-  const addToCardHandler = async (product) => {
-    const res = await addItemToCart(authToken, product);
-    const data = await res.data;
-    if (data.cart) {
-      userInfoDispatch({
-        type: "INCREMENT_CART_PRODUCT",
-        payload: { product: product },
-      });
-      alertSetter({
-        alertAction: "ALERT-PRIMARY",
-        alertMessage: "Successfully Added To Cart!",
-      });
-      alertHide();
-    }
-  };
+const ListingCard = ({ productItem, authToken }) => {
+  const { title, price, imgURL, rating, _id } = productItem;
+  const {
+    userInfoState: { wishlistItems },
+    addToCartHandler,
+    removeFromWishlistHandler,
+    addToWishlistHandler,
+  } = useUserInfo();
+  const {
+    auth: { token },
+  } = useAuth();
 
   return (
     <div className="listing-card">
       <div className="listing-img-container">
         <img src={imgURL} className="listing-img" alt="" />
-        <BsHeart className="card-wishlist-icon" />
+        {isProductInWishlist(_id, wishlistItems) ? (
+          <BsHeartFill
+            className="card-wishlist-icon"
+            onClick={() => removeFromWishlistHandler(productItem, authToken)}
+          />
+        ) : (
+          <BsHeart
+            className="card-wishlist-icon"
+            onClick={() => addToWishlistHandler(productItem, authToken)}
+          />
+        )}
         <div className="card-dark-overlay"></div>
       </div>
       <div className="listing-card-content">
@@ -45,7 +47,7 @@ const ListingCard = ({ productItem, authToken }) => {
         <div className="listing-card-actions">
           <button
             className="btn card-action-btn"
-            onClick={() => addToCardHandler(productItem)}
+            onClick={() => addToCartHandler(productItem, authToken)}
           >
             ADD TO CART
           </button>

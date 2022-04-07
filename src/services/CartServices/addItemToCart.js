@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const addItemToCart = (encodedToken, product) => {
-  return axios.post("/api/user/cart", product, {
+export const addItemToCart = async (encodedToken, product) => {
+  return await axios.post("/api/user/cart", product, {
     headers: {
       authorization: encodedToken,
     },

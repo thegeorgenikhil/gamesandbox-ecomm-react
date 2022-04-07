@@ -7,21 +7,24 @@ import { AlertProvider } from "./context/alertContext";
 import { AuthProvider } from "./context/authContext";
 import { ListingProvider } from "./context/listingContext";
 import { UserInfoProvider } from "./context/userInfoContext";
+import { BrowserRouter } from "react-router-dom";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <UserInfoProvider>
+    <BrowserRouter>
+      <AuthProvider>
         <AlertProvider>
-          <ListingProvider>
-            <App />
-          </ListingProvider>
+          <UserInfoProvider>
+            <ListingProvider>
+              <App />
+            </ListingProvider>
+          </UserInfoProvider>
         </AlertProvider>
-      </UserInfoProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

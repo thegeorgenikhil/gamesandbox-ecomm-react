@@ -2,8 +2,8 @@ import React from "react";
 import {
   AiOutlineShoppingCart,
   AiOutlineHeart,
-  AiOutlineSearch,
 } from "react-icons/ai";
+import { FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { useUserInfo } from "../../context/userInfoContext";
@@ -12,7 +12,7 @@ import "./Navbar.css";
 const Navbar = () => {
   const { auth, setAuth } = useAuth();
   const { userInfoDispatch, userInfoState } = useUserInfo();
-  const { cartItems } = userInfoState;
+  const { cartItems, wishlistItems } = userInfoState;
   const { isAuthenticated } = auth;
   const navigate = useNavigate();
 
@@ -27,23 +27,13 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-left-container">
         <Link to={"/"} className="format-link nav-brand">
-          GameSandbox.
+          🕹️GameSandbox.
         </Link>
         <Link to={"/games/all"} className="format-link browse-btn">
           Discover
         </Link>
       </div>
       <ul className="nav-items">
-        <li className="nav-item">
-          <div className="nav-item-link nav-search-container">
-            <AiOutlineSearch className="nav-icon" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="nav-search-input"
-            />
-          </div>
-        </li>
         <li className="nav-item">
           <div className="icon-badge-container">
             <Link className="nav-item-link" to="/cart">
@@ -59,11 +49,16 @@ const Navbar = () => {
             <Link className="nav-item-link" to="/wishlist">
               <AiOutlineHeart className="nav-icon" />
             </Link>
+            {wishlistItems.length > 0 && (
+              <div className="icon-badge">{wishlistItems.length}</div>
+            )}
           </div>
         </li>
         {isAuthenticated ? (
           <li className="nav-item nav-signout-btn" onClick={signOutHandler}>
-            <p className="nav-item-link">SIGN-OUT</p>
+            <p className="nav-item-link">
+              <FaSignOutAlt className="nav-icon" />
+            </p>
           </li>
         ) : (
           <Link to={"/signup"} className="format-link">

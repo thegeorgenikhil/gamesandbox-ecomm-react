@@ -32,7 +32,7 @@ const Footer = () => {
 
       <div className="footer-copyright-container">
           <p className="footer-copyright">Copyright ©2022 GameSandBox. All rights reserved.</p>
-          <h2>GameSandbox.</h2>
+          <h2>🕹️GameSandbox.</h2>
       </div>
     </footer>
   );

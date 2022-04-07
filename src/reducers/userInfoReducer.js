@@ -23,6 +23,18 @@ export const userInfoReducer = (state, action) => {
           cartItems: updatedArray,
         };
       }
+    case "ADD_TO_WISHLIST":
+      return {
+        ...state,
+        wishlistItems: [...state.wishlistItems, action.payload.product],
+      };
+    case "REMOVE_FROM_WISHLIST":
+      return {
+        ...state,
+        wishlistItems: state.wishlistItems.filter(
+          (item) => item._id !== action.payload.product._id
+        ),
+      };
     case "CLEAR_USER_DETAILS":
       return { cartItems: [], wishlistItems: [] };
     default:

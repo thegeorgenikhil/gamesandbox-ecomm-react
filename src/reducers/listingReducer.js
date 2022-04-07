@@ -7,6 +7,7 @@ export const listingReducer = (state, action) => {
       return {
         ...state,
         products: action.payload.products,
+        maxPrice: action.payload.price,
         price: action.payload.price,
       };
     case "LISTING_SORT":
@@ -26,6 +27,8 @@ export const listingReducer = (state, action) => {
         categoryList
       );
       return { ...state, categoryList: updatedCategoryList };
+    case "UPDATE_SINGLE_CATEGORY":
+      return { ...state, categoryList: [action.payload.categoryName] };
     case "UPDATE_LISTING_PRICE":
       return { ...state, price: action.payload.price };
     case "UPDATE_LISTING_RATING":
