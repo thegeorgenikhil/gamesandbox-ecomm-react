@@ -7,6 +7,7 @@ export const listingReducer = (state, action) => {
       return {
         ...state,
         products: action.payload.products,
+        maxPrice: action.payload.price,
         price: action.payload.price,
       };
     case "LISTING_SORT":

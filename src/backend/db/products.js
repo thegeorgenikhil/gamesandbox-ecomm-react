@@ -38,6 +38,8 @@ export const products = [
     title: "Red Redemption 2",
     price: "4999",
     categoryName: "SHOOTING",
+    bannerImgURL:
+      "https://res.cloudinary.com/dgi9vljim/image/upload/v1649348308/GameSandbox/main-1_qne93r.jpg",
     imgURL:
       "https://res.cloudinary.com/dgi9vljim/image/upload/v1648231692/GameSandbox/product-images/red-dead-redemption-2_rffw1s.png",
     rating: 4.9,

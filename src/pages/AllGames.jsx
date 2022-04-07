@@ -10,11 +10,10 @@ import { applyRatingFilter } from "../helpers/filterHelpers/ratingFilter";
 import { useAuth } from "../context/authContext";
 
 const AllGames = () => {
-  const [sliderMaxValue, setSliderMaxValue] = useState();
   const { listingState, listingDispatch } = useListing();
   const { auth } = useAuth();
 
-  const { products, categoryList, price, rating } = listingState;
+  const { products, categoryList, price, rating, maxPrice } = listingState;
   const { token } = auth;
   const priceFilteredList = applyPriceFilter(products, price);
   const rateFilteredList = applyRatingFilter(priceFilteredList, rating);
@@ -39,17 +38,6 @@ const AllGames = () => {
       payload: { rating: Number(e.target.value) },
     });
   };
-
-  useEffect(async () => {
-    const res = await getAllProducts();
-    const data = await res.data;
-    const maxPrice = data.products.reduce(maxPriceReducer, 0);
-    setSliderMaxValue(maxPrice);
-    listingDispatch({
-      type: "PRODUCT_LIST_SET",
-      payload: { products: data.products, price: Number(maxPrice) },
-    });
-  }, []);
 
   return (
     <div>
@@ -131,7 +119,7 @@ const AllGames = () => {
                     type="range"
                     name="slider"
                     min="0"
-                    max={sliderMaxValue}
+                    max={maxPrice}
                     id="slider"
                     value={price}
                     onChange={sliderChangeHandler}
