@@ -11,7 +11,7 @@ const CategoriesSection = () => {
   const thumbnailImgArr = [
     { id: 1, name: "RACING", src: RacingThumbnail },
     { id: 2, name: "OPEN-WORLD", src: OpenWorldThumbnail },
-    { id: 3, name: "SHOOTER", src: ShooterThumbnail },
+    { id: 3, name: "SHOOTING", src: ShooterThumbnail },
   ];
   const navigate = useNavigate();
 

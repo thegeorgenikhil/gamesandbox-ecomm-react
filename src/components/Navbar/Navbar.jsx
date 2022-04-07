@@ -4,6 +4,8 @@ import {
   AiOutlineHeart,
   AiOutlineSearch,
 } from "react-icons/ai";
+import { BiUserCircle } from "react-icons/bi";
+import { FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { useUserInfo } from "../../context/userInfoContext";
@@ -35,16 +37,6 @@ const Navbar = () => {
       </div>
       <ul className="nav-items">
         <li className="nav-item">
-          <div className="nav-item-link nav-search-container">
-            <AiOutlineSearch className="nav-icon" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="nav-search-input"
-            />
-          </div>
-        </li>
-        <li className="nav-item">
           <div className="icon-badge-container">
             <Link className="nav-item-link" to="/cart">
               <AiOutlineShoppingCart className="nav-icon" />
@@ -66,7 +58,9 @@ const Navbar = () => {
         </li>
         {isAuthenticated ? (
           <li className="nav-item nav-signout-btn" onClick={signOutHandler}>
-            <p className="nav-item-link">SIGN-OUT</p>
+            <p className="nav-item-link">
+              <FaSignOutAlt className="nav-icon" />
+            </p>
           </li>
         ) : (
           <Link to={"/signup"} className="format-link">

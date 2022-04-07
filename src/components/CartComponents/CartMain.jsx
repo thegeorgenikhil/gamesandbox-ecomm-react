@@ -31,7 +31,6 @@ const CartMain = () => {
           detail={user.phoneNumber}
           detailName="PHONE NUMBER"
         />
-        <CustomerDetailContainer detailName="ADDRESS" />
       </div>
     </main>
   );
