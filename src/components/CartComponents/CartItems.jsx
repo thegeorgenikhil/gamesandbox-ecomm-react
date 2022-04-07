@@ -1,5 +1,4 @@
 import React from "react";
-import ForzaImg from "../../assets/listing-images/forza-horizon.png";
 import { useAlert } from "../../context/alertContext";
 import { useAuth } from "../../context/authContext";
 import { useUserInfo } from "../../context/userInfoContext";

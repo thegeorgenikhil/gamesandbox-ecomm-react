@@ -1,6 +1,5 @@
 import React from "react";
 import "./HomeCarousel.css";
-import Image from "../../assets/home-main-images/main-1.jpg";
 import { useUserInfo } from "../../context/userInfoContext";
 import { useAuth } from "../../context/authContext";
 
