@@ -2,9 +2,7 @@ import React from "react";
 import {
   AiOutlineShoppingCart,
   AiOutlineHeart,
-  AiOutlineSearch,
 } from "react-icons/ai";
-import { BiUserCircle } from "react-icons/bi";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { useAuth } from "../../context/authContext";

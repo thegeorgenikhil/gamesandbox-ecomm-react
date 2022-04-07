@@ -103,7 +103,7 @@ const AllGames = () => {
                   onClick={() =>
                     listingDispatch({
                       type: "CLEAR_ALL_FILTERS",
-                      payload: { maxPrice: sliderMaxValue },
+                      payload: { maxPrice: price },
                     })
                   }
                 >
