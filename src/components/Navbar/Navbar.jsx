@@ -27,7 +27,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-left-container">
         <Link to={"/"} className="format-link nav-brand">
-          GameSandbox.
+          🕹️GameSandbox.
         </Link>
         <Link to={"/games/all"} className="format-link browse-btn">
           Discover

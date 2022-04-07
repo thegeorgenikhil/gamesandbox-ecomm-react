@@ -46,11 +46,17 @@ const SignIn = () => {
             password: undefined,
           })
         );
+        setFormData({ email: "", password: "" });
         setIsLoading(false);
         return navigate("/games/all");
       }
     } catch (error) {
       console.log(error);
+      alertSetter({
+        alertAction: "ALERT-DANGER",
+        alertMessage: "Failed to sign-in. Try again!",
+      });
+      alertHide();
     }
   };
   return (
